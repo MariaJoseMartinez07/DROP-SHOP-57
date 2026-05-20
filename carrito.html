@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito | DropShop+57</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo-box">
+        <img src="assets/logo.png" class="logo">
+        <h1>DROPSHOP+57</h1>
+    </div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="sobre-nosotros.html">Nosotros</a>
+
+        <a href="carrito.html">
+            Carrito
+            <span id="contador-carrito">0</span>
+        </a>
+
+        <a href="contacto.html">Contacto</a>
+    </nav>
+
+</header>
+
+<main class="pagina-carrito">
+
+    <h2>Tu carrito de compras</h2>
+
+    <div
+        id="lista-carrito"
+        class="lista-carrito">
+    </div>
+
+    <div class="resumen-carrito">
+
+        <h3 id="total">
+            Total: $0 COP
+        </h3>
+
+        <div class="acciones-carrito">
+
+            <!-- BOTÓN ARREGLADO -->
+            <a
+                href="checkout.html"
+                class="btn-principal">
+
+                Finalizar compra
+
+            </a>
+
+            <button
+                class="btn-secundario"
+                onclick="vaciarCarrito()">
+
+                Vaciar carrito
+
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer>
+    <p>
+        © 2026 DropShop+57 -
+        Todos los derechos reservados
+    </p>
+</footer>
+
+<script>
+
+let carrito =
+JSON.parse(localStorage.getItem("carrito")) || [];
+
+const lista =
+document.getElementById("lista-carrito");
+
+const total =
+document.getElementById("total");
+
+const contador =
+document.getElementById("contador-carrito");
+
+mostrarCarrito();
+actualizarContador();
+
+function mostrarCarrito(){
+
+    lista.innerHTML = "";
+
+    let suma = 0;
+
+    carrito.forEach((producto) => {
+
+        lista.innerHTML += `
+            <div class="item-carrito">
+
+                <img src="${producto.imagen}">
+
+                <div>
+                    <h3>${producto.nombre}</h3>
+                    <p>${producto.precio}</p>
+                </div>
+
+            </div>
+        `;
+
+        suma += 330000;
+    });
+
+    total.textContent =
+    `Total: $${suma.toLocaleString()} COP`;
+}
+
+function vaciarCarrito(){
+
+    localStorage.removeItem("carrito");
+
+    carrito = [];
+
+    mostrarCarrito();
+
+    actualizarContador();
+}
+
+function actualizarContador(){
+
+    if(contador){
+        contador.textContent =
+        carrito.length;
+    }
+}
+
+</script>
+
+</body>
+
+</html>

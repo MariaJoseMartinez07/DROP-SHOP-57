@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | DropShop+57</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo-box">
+            <img src="assets/logo.png"
+                alt="Logo DropShop+57"
+                class="logo">
+
+            <h1>DROPSHOP+57</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="sobre-nosotros.html">Nosotros</a>
+
+            <a href="carrito.html">
+                Carrito
+                <span id="contador-carrito">0</span>
+            </a>
+
+            <a href="contacto.html">Contacto</a>
+        </nav>
+
+    </header>
+
+    <!-- CHECKOUT -->
+    <section class="checkout-page">
+
+        <h2>Finalizar compra</h2>
+
+        <div class="checkout-container">
+
+            <!-- FORMULARIO -->
+            <div class="checkout-form">
+
+                <h3>Información del cliente</h3>
+
+                <form id="checkout-form">
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Nombre completo"
+                        required>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="Correo electrónico"
+                        required>
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        placeholder="Número de teléfono"
+                        required>
+
+                    <input
+                        type="text"
+                        id="ciudad"
+                        placeholder="Ciudad"
+                        required>
+
+                    <input
+                        type="text"
+                        id="direccion"
+                        placeholder="Dirección de envío"
+                        required>
+
+                    <select id="pago" required>
+                        <option value="">
+                            Método de pago
+                        </option>
+
+                        <option value="Bancolombia">
+                            Transferencia Bancolombia
+                        </option>
+
+                        <option value="Nequi">
+                            Nequi
+                        </option>
+
+                        <option value="Daviplata">
+                            Daviplata
+                        </option>
+
+                        <option value="Contra entrega">
+                            Contra entrega
+                        </option>
+                    </select>
+
+                </form>
+
+            </div>
+
+            <!-- RESUMEN -->
+            <div class="checkout-resumen">
+
+                <h3>Resumen del pedido</h3>
+
+                <div id="checkout-productos">
+                </div>
+
+                <h2 id="checkout-total">
+                    Total: $0 COP
+                </h2>
+
+                <button
+                    type="button"
+                    class="btn-finalizar"
+                    id="btn-confirmar">
+
+                    Confirmar pedido
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            © 2026 DropShop+57 -
+            Todos los derechos reservados
+        </p>
+    </footer>
+
+    <script>
+
+        // ======================
+        // CARGAR CARRITO
+        // ======================
+
+        const carritoCheckout =
+        JSON.parse(localStorage.getItem("carrito")) || [];
+
+        const contenedorCheckout =
+        document.getElementById("checkout-productos");
+
+        const totalCheckout =
+        document.getElementById("checkout-total");
+
+        const contadorCarrito =
+        document.getElementById("contador-carrito");
+
+        contadorCarrito.textContent =
+        carritoCheckout.length;
+
+        let sumaCheckout = 0;
+
+        contenedorCheckout.innerHTML = "";
+
+        carritoCheckout.forEach((producto) => {
+
+            contenedorCheckout.innerHTML += `
+                <div class="item-checkout">
+
+                    <img
+                        src="${producto.imagen}"
+                        alt="${producto.nombre}">
+
+                    <div>
+                        <h4>${producto.nombre}</h4>
+
+                        <p>${producto.precio}</p>
+                    </div>
+
+                </div>
+            `;
+
+            sumaCheckout += 330000;
+        });
+
+        totalCheckout.textContent =
+        `Total: $${sumaCheckout.toLocaleString()} COP`;
+
+
+
+        // ======================
+        // CONFIRMAR PEDIDO
+        // ======================
+
+        document
+        .getElementById("btn-confirmar")
+        .addEventListener("click", function () {
+
+            const nombre =
+            document.getElementById("nombre").value.trim();
+
+            const correo =
+            document.getElementById("correo").value.trim();
+
+            const telefono =
+            document.getElementById("telefono").value.trim();
+
+            const ciudad =
+            document.getElementById("ciudad").value.trim();
+
+            const direccion =
+            document.getElementById("direccion").value.trim();
+
+            const pago =
+            document.getElementById("pago").value;
+
+            // Validar campos
+            if (
+                !nombre ||
+                !correo ||
+                !telefono ||
+                !ciudad ||
+                !direccion ||
+                !pago
+            ) {
+
+                alert("Por favor completa todos los campos.");
+                return;
+            }
+
+            // Validar carrito
+            if (carritoCheckout.length === 0) {
+
+                alert("Tu carrito está vacío.");
+                return;
+            }
+
+            // Pedido exitoso
+            alert("¡Pedido realizado con éxito! 🎉");
+
+            localStorage.removeItem("carrito");
+
+            window.location.href = "index.html";
+
+        });
+
+    </script>
+
+</body>
+
+</html>
