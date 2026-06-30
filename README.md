@@ -1,2 +1,3 @@
-# DROP-SHOP-57
-PAGINA WEB DESTINADA A VENDER PRODUCTOS EXPORTADOS DESDE MEXICO.
+DROP-SHOP-57
+
+DropShop+57 es una plataforma web de comercio electrónico desarrollada como proyecto de Ingeniería de Software, orientada a la comercialización de gorras y productos de moda urbana (streetwear) en Colombia. La aplicación permite explorar un catálogo de productos, gestionar un carrito de compras, realizar el proceso de checkout y contactar con la marca mediante una interfaz moderna, responsiva e intuitiva. El proyecto fue desarrollado utilizando HTML, CSS y JavaScript, aplicando principios de diseño web y metodologías ágiles para ofrecer una experiencia de usuario eficiente y escalable.
